@@ -59,3 +59,66 @@ Title mostly self explanatory, but here is a slightly more detailed explanation:
 ![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NTU2OSwicHVyIjoiYmxvYl9pZCJ9fQ==--b9031aacad4fa4875134d00796e301c48af1c9bd/image.png)
   
 
+## 11/5/2025 - Addressing Potential Confusion with Reviewer  
+
+I think there is a bit of confusion going on, so here is how I am addressing it with the reviewer. I also sent the same thing through Slack DM as well.
+
+Hi there,
+
+There seems to be a bit of miscommunication regarding my Blueprint project ("ESP32 CAN DevKit Lite"), and how I designed it.
+
+First, I am not accusing anyone of any wrongdoing. This is also the first project I have ever submitted to a Hack Club program, so I apologize if I unintentionally overlooked any rules. I would also appreciate it if you could explain in specific details about which rule I have violated so that I don't repeat the same mistake in the future.
+
+Here is my explanation:
+
+Context: On FIRST Robotics Competition (FRC) competition robots, the main industrial computer used is the [NI roboRIO v1 or v2](https://andymark.com/products/ni-roborio-2-0) (hereafter referred to as the RIO). Currently the RIO has a lot of GPIO (44 to be exact), which as you may imagine, is probably very useful to connect devices (PWM motor controllers, addressable LED strips, sensors, etc.) on a robot to be controlled by code.
+
+However, in 2027, the contract between NI and FIRST will expire, and thus the RIO officially becomes obsolete. The RIO will also most likely be no longer permitted for competition use due to this change. The replacement, called Systemcore, uses a Raspberry Pi CM5, which provides a huge performance increase. However, there are only 6 "Smart IO" GPIO connectors, compared to the 44 available on the RIO. This can be a potential issue for teams who want to connect more than 6 devices, or multiple devices that use more than 1 pin.
+
+Additionally, some teams want to connect sensors over long distances from the RIO, which could lead to potential interference running a signal wire that long of a distance. As the main communication protocol on FRC robots over the past few years is CAN Bus which has various methods (such as differential signaling and twisted pair wiring) to avoid interference, various companies have come up with solutions such as CAN bus LED controllers and GPIO adapters to address these challenges. [Existing adapters](https://store.ctr-electronics.com/products/candi) are expensive and have limited IO pins, which means that teams are forced to buy multiple.
+
+This brings me to my main point.
+
+After seeing [Nathan Zhou's post](https://www.chiefdelphi.com/t/custom-can-sensor-esp32-development-board/505038) on Chief Delphi about his ESP32 CAN board, I realized there was an opportunity to improve the design. Nathan's design was functional, but I made several modifications to better suit the needs of FRC teams. Nathan indicated that he wanted to focus on software development and was not interested in changing the hardware design, which I understood and respected.
+
+I edited the schematic, but **created the entire PCB from scratch** as I didn't know how to edit PCBs at the time.
+
+Changes in my design include:
+- Replacing his NRND ESP32 module with an Adafruit Feather-compatible MCU port.
+- Removing the relay (which is not needed, as high-current devices such as motors tend to require FRC-legal controllers)
+- Adding Adafruit STEMMA connectors for I2C (used by some sensors) and NeoPixel addressable LEDs
+* The I2C port on the RIO is very bad, as it causes system lockups (not good during competition).
+* Also avoids potential wiring mistakes as well, since STEMMA is standardized
+- Removing unneeded headers for extra RFID and CAN bus
+- Added Molex SL GPIO headers (same as Systemcore) to maintain both backwards compatibility with existing devices developed for the RIO, as well as new devices developed for the Systemcore.
+* Same pinout as Systemcore and RIO to avoid wiring mistakes
+- Made the PCB smaller, as weight and space are major concerns on FRC robots.
+
+I also spoke with Nathan directly in person, and he confirmed that he was fine with my changes and even provided a few helpful suggestions for improvement.
+
+Nathan's original project is licensed under GPLv3, which permits derivative works. According to the [Blueprint Submission Guidelines](https://blueprint.hackclub.com/about/submission-guidelines)
+, following online guides and making original modifications is allowed.
+
+In addition to that, Blueprint rules allow following online guides, as seen in both the ["Submission Guidelines" page](https://blueprint.hackclub.com/about/submission-guidelines) under the "About Blueprint" tab (screenshot attached below). Looking at the ["Explore" section](https://blueprint.hackclub.com/explore?sort=top&type=projects) of the Blueprint website, I also see others using guides to make their own projects. I believe that this counts as an "original touch" because of all the changes I have made. This is also very obvious if you look at both designs (attached below for reference).
+
+If you have any more questions and/or concerns, please DM me. I will consider this matter resolved if I am allowed to submit this project without the risk of getting banned.
+
+I think Hack Club is a fairly good organization with a good mission to encourage more teens to get into STEM.
+
+However, I would also like to provide feedback:
+1. Threatening to reject designs and permaban people from all Hack Club events this aggressively without specifying the exact rule was broken is concerning.
+2. There should be a more clearer explanation on how to contact the reviewer, as the "Bluey" bot on Slack doesn't let you reply and makes no mention of sending a DM or making another journal entry, which is a bit confusing.
+
+Thank you for your consideration.
+
+Nathan Zhou allowing derivatives:
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODY2MSwicHVyIjoiYmxvYl9pZCJ9fQ==--872f96a7620ab55148e7632a3d233a9061666521/image.png)
+Rules screenshot:
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODY1OCwicHVyIjoiYmxvYl9pZCJ9fQ==--0daf276af611d19d8995088446a2ae7d4be8990c/image.png)
+Original design:
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODY1OSwicHVyIjoiYmxvYl9pZCJ9fQ==--4e53fbbe79f8fb5a648cd17bce3c6fb821a76979/image.png)
+My design:
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODY2MCwicHVyIjoiYmxvYl9pZCJ9fQ==--c73c376a6e99433d05a8ed8513a7142872d02de6/image.png)
+"Bluey" bot not allowing responses to be sent:
+![image](https://blueprint.hackclub.com/user-attachments/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6ODY2NCwicHVyIjoiYmxvYl9pZCJ9fQ==--610077b6c112aff1940e689c70538e40e02697ba/image.png)  
+
