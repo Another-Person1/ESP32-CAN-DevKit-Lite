@@ -1,7 +1,7 @@
 # ESP32 CAN DevKit Lite
 <img width="1217" height="903" alt="image" src="https://github.com/user-attachments/assets/06749114-c077-40aa-bb25-27e72733f775" />
 
-Disclaimer: All trademarks are properties of their respective owners and I am not affiliated with FIRST HQ, IronMaple, or any other company whose trademarks are mentioned here. There is no warranty provided and everything is licensed under GPLv3. Usage of this device on competition FRC robots are also regulated by the current FRC Game Manual and other rules, so check that before usage.
+**Disclaimer: All trademarks are properties of their respective owners and I am not affiliated with FIRST HQ, IronMaple, or any other company whose trademarks are mentioned here. There is no warranty provided and everything is licensed under GPLv3. Usage of this device on competition FRC robots are also regulated by the current FRC Game Manual and other rules, so check that before usage.**
 
 This is a lite version of the ESP32 FRC DevKit forked from IronMaple's original design: https://oshwlab.com/sikaxn/seal-v2-dev-board.
 
